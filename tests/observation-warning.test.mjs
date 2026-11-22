@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {observationWarning} from '../src/connections-server.mjs';
+test('新记录无需陈旧提醒；旧记录、坏时间、未来时间只提供准确说明',()=>{assert.equal(observationWarning(new Date().toISOString()),null);assert.match(observationWarning('2020-01-01T00:00:00Z'),/不会阻止/);assert.match(observationWarning('invalid'),/不可确认/);assert.match(observationWarning('2999-01-01T00:00:00Z'),/不可确认/);});

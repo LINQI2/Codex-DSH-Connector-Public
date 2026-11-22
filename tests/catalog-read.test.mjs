@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {oncePerSource} from '../src/catalog-read.mjs';
+test('同次刷新同Host只查询一次，跨Host独立、下一次刷新重新读取',async()=>{let n=0;const load=async key=>({key,version:++n});const read=oncePerSource(load);const [a,b,c]=await Promise.all([read('a'),read('a'),read('b')]);assert.equal(n,2);assert.equal(a,b);assert.notEqual(a,c);assert.equal((await oncePerSource(load)('a')).version,3);});
+test('本次失败不循环重试，不会拿旧成功结果冒充新身份',async()=>{let n=0;const read=oncePerSource(async()=>{n++;throw Error('unavailable');});await assert.rejects(read('a'));await assert.rejects(read('a'));assert.equal(n,1);});

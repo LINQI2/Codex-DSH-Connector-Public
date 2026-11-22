@@ -1,0 +1,5 @@
+{
+  "hostReadyFile": "D:\\path-to-explicitly-approved-validation-home\\browser-ready.json",
+  "expectedSessionId": "replace-with-verified-session-id",
+  "expectedWorkspace": "D:\\path-to-explicitly-approved-validation-workspace"
+}

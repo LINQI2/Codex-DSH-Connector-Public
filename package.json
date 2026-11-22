@@ -1,0 +1,23 @@
+{
+  "name": "codex-dsh-connector-validation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "原生客户端可见协作的独立验证项目；尚未安装后台自动路由",
+  "scripts": {
+    "open": "node scripts/desktop.mjs open",
+    "services": "node scripts/desktop.mjs status",
+    "stop": "node scripts/desktop.mjs stop",
+    "inbox": "node scripts/mailbox.mjs pending",
+    "host": "node scripts/host.mjs",
+    "connections": "node scripts/connections.mjs",
+    "status": "node scripts/session.mjs status",
+    "diagnose": "node scripts/diagnose.mjs",
+    "delegate": "node scripts/delegate.mjs",
+    "wait-feedback": "node scripts/wait-feedback.mjs",
+    "configure": "node scripts/session.mjs configure",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

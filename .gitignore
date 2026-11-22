@@ -1,0 +1,20 @@
+# Source and public documentation only. No credentials, sessions or logs.
+node_modules/
+.runtime/
+config/local.json
+config/*.backup-*.json
+**/.credentials*
+**/.env*
+**/auth.json
+**/*.sqlite*
+**/*.db*
+**/*.log
+**/*.pem
+**/*.key
+**/browser-ready.json
+**/home/
+**/sessions/
+
+# Local development records
+/history/
+/reflections/

@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import {root,loadConfig} from '../src/config.mjs';
+import {connect} from '../src/client.mjs';
+import {BindingStore} from '../src/bindings.mjs';
+import {Workspaces} from '../src/workspaces.mjs';
+const action=process.argv[2]??'status';
+if(!['status','configure'].includes(action))throw Error('仅支持 status（只读）或 configure（真实模型设置）');
+const store=new BindingStore(path.join(root,'.runtime')),binding=store.read();
+const config=binding?new Workspaces(loadConfig()).configFor(binding.dsh):loadConfig();
+if(action==='configure')store.assertCanSend(config.expectedSessionId);
+const client=await connect(config);
+const result=action==='status'?await client.status():await client.configure(fs.readFileSync(path.join(root,'rules','interaction.md'),'utf8'));
+console.log(JSON.stringify(result,null,2));
